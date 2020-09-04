@@ -41,6 +41,9 @@ Make sure to have the following points marked :
 
 > TODO
 
+### Run your tests 
+
+> TODO 
 
 ### Production
 

@@ -1,8 +1,12 @@
 FROM ubuntu:16.04
 
-ENV URL="https://www.google.com"
+ENV URL="https://github.com/ayoubeddafali/sind"
 ENV LOGIN="LOGIN"
 ENV PASSWORD="PASSWORD"
+ENV SCREENSHOTS_DIR="/home/agent/screenshots/"
+ENV DOWNLOADS_DIR="/home/agent/downloads/"
+ENV ENVIRONMENT="prod"
+ENV DEBUG=False
 ENV DISPLAY=:99
 
 # Install Chrome
@@ -24,8 +28,7 @@ RUN apt-get update && apt-get install -y \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
 	&& apt-get update && apt-get install -y google-chrome-stable
 
-RUN apt-get update \
-	&& apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 		vim \
 		ca-certificates \
 		curl \
@@ -41,12 +44,12 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 
-RUN pip install --upgrade pip
-RUN pip install wheel
-RUN pip install python-xlib
-RUN pip install selenium
-RUN pip install pyautogui
-RUN pip install pyscreenshot
+RUN pip install --upgrade pip \ 
+	&& pip install wheel \
+	&& pip install python-xlib \
+	&& pip install selenium \
+	&& pip install pyautogui \
+	&& pip install pyscreenshot
 
 WORKDIR /home/agent
 
@@ -54,7 +57,7 @@ COPY . .
 
 RUN  pip install -r requirements.txt
 
-RUN  mkdir -p /home/agent/screenshots &&  chmod +x start.sh
+RUN  mkdir -p ${SCREENSHOTS_DIR} &&  chmod +x start.sh
 
 ENTRYPOINT [ "/home/agent/start.sh" ]
 CMD ["python", "main.py"]

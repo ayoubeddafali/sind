@@ -12,27 +12,20 @@ import glob
 pyautogui.FAILSAFE = False
 
 class ExecutionPlan: 
-    def __init__(self, browser, display, login, password): 
+    def __init__(self, browser, display, login, password, downloads_dir, screenshots_dir): 
         self.browser = browser
         self.display = display
         self.login = login 
         self.password = password
+        self.downloads_dir = downloads_dir
+        self.screenshots_dir = screenshots_dir
 
-    def run(self, base_url, users): 
+    def run(self, base_url): 
         self.browser.get(base_url)
         try:
             # This is just an example scenario
-            pyautogui.screenshot('/home/agent/screenshots/1.png')       
-            usernameInput = self.browser.find_element_by_id("usernamefld")
-            usernameInput.clear()
-            usernameInput.send_keys(self.login)
-            pyautogui.screenshot('/home/agent/screenshots/1.png')
-            passowrdInput = self.browser.find_element_by_id("passwordfld")
-            passowrdInput.clear()
-            passowrdInput.send_keys(self.password)
-            pyautogui.screenshot('/home/agent/screenshots/3.png')
-            loginBtn = self.browser.find_element_by_name("login")
-            loginBtn.click()
+            pyautogui.screenshot("{}/1.png".format(self.screenshots_dir))       
+            sleep(5)
 
         except TimeoutException as timeout:
             print(timeout)

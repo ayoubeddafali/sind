@@ -2,6 +2,7 @@
   <img  src="./images/logo.png" width="300" height="300" />
 </div>
 
+<br>
 
 > A minimal framework to automate web Actions/Plans, and run them in a containerized fashion. 
 
@@ -40,9 +41,28 @@ executionPlan.run(URL)
 
 While on development phase, you might need to run the plan locally and see your selenium script. 
 
-Make sure to have the following points marked : 
+Make sure to have the following points marked. 
 
+1. Install some tools :
 
+```bash
+$ sudo apt-get install -y xvfb xserver-xephyr
+$ sudo apt-get install scrot -y
+```
+
+2. Setup environment & dependencies
+
+```bash
+$ pip install pipenv 
+$ make shell
+$ make install
+```
+
+3. Run your app : 
+
+```
+$ make run
+```
 
 ### Run your tests 
 
@@ -50,15 +70,12 @@ Make sure to have the following points marked :
 $ make test
 ```
 
-> TODO 
-
 ### Production
 
 Once you've finished writing your scenario, you will then start by building a docker image : 
 
-> TODO
 ```bash
-
+$ IMAGE_TAG=custom_image:1.0  make image
 ```
 
 ### Available Tools : 

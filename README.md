@@ -6,16 +6,18 @@
 
 > A minimal framework to automate web Actions/Plans, and run them in a containerized fashion. 
 
+![build status](https://github.com/ayoubeddafali/sind/workflows/Python%20application/badge.svg)
+
 ### Structure
 
 The project is composed of : 
 
  - **drivers/** : Contains the webdrivers for both chrome & firefox. 
- - **tests/** : Where you puts you tests. 
+ - **tests/** : Where you puts your tests. 
  - **downloads/** : An optional folder in case your selenium script will need to download/save something for the web. 
  - **Dockerfile.chrome** : Dockerfile with necessary prerequisite for chrome browser.
  - **main.py** : Entry file.
- - **Pipefile** : Packages. 
+ - **Pipefile** : Dev Packages. 
  - **plan.py** : Example plan file. 
  - **start.sh** : bash script used as entrypoint for the docker image.
 
@@ -78,6 +80,18 @@ Once you've finished writing your scenario, you will then start by building a do
 $ IMAGE_TAG=custom_image:1.0  make image
 ```
 
+And run it like : 
+
+```bash
+$ docker run custom_image:1.0 
+# Or 
+$ docker run -v /tmp/screens:/home/agent/screenshots custom_image:1.0 
+# Or
+$ docker run -v /tmp/screens:/home/agent/screenshots -v /tmp/downloads:/home/agent/screenshots custom_image:1.0 
+# You can also pass environments variables at runtime
+# List can be found on the dockerfile
+```
+
 ### Available Tools : 
 
  - selenium : Trivial
@@ -87,5 +101,5 @@ $ IMAGE_TAG=custom_image:1.0  make image
 
 &copy; 2020, Ayoub Ed-dafali.
 
-[![ForTheBadge built-with-swag](http://ForTheBadge.com/images/badges/built-with-swag.svg)]()
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
